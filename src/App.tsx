@@ -12,6 +12,7 @@ function App() {
             ? process.env.REACT_APP_PROD_API_URL
             : process.env.REACT_APP_LOCAL_API_URL) + "/api/data";
         console.log(process.env);
+        console.log(process.env.REACT_APP_PROD_API_URL);
         const response = await fetch(URL); // Replace "/api/data" with your actual API endpoint
         const data = await response.json();
         console.log(data); // Handle the data received from the server
