@@ -7,11 +7,12 @@ function App() {
     // Function to make the API call
     const fetchData = async () => {
       try {
-        const response = await fetch(
+        const URL =
           (process.env.NODE_ENV === "production"
             ? process.env.REACT_APP_PROD_API_URL
-            : process.env.REACT_APP_LOCAL_API_URL) + "/api/data"
-        ); // Replace "/api/data" with your actual API endpoint
+            : process.env.REACT_APP_LOCAL_API_URL) + "/api/data";
+        console.log(process.env);
+        const response = await fetch(URL); // Replace "/api/data" with your actual API endpoint
         const data = await response.json();
         console.log(data); // Handle the data received from the server
       } catch (error) {
