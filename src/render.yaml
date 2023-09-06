@@ -1,4 +1,0 @@
-redirects:
-  - source: /.* # Match all URLs
-    destination: /index.html
-    force: true
