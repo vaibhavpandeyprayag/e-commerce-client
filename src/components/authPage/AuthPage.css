@@ -8,11 +8,13 @@
 .form-control-custom {
   width: 100%;
   color: black;
-  border: 1px solid darkgray;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid darkgray;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   border-radius: 2px;
   outline: 0;
-  box-shadow: -5px 2px 0px 0px black;
 }
 
 .w-custom {
@@ -51,13 +53,13 @@
 /* lg */
 @media (min-width: 992px) {
   .w-custom {
-    width: 48%;
+    width: 40%;
   }
 }
 
 /* xl */
 @media (min-width: 1200px) {
   .w-custom {
-    width: 35%;
+    width: 30%;
   }
 }

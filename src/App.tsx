@@ -26,7 +26,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
-      <Route path="/authpage" element={<AuthPage />}></Route>
+      <Route path="/signup" element={<AuthPage />}></Route>
+      <Route path="/login" element={<AuthPage />}></Route>
+      <Route path="/forgotpassword" element={<AuthPage />}></Route>
       <Route path="*" element={<ErrorPage />}></Route>
     </Routes>
   );

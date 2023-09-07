@@ -4,8 +4,8 @@ function Home() {
   return (
     <div>
       HOME PAGE
-      <Link to="/authpage">Go to Login</Link>
-      <Link to="/authpage">Create Account</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/signup">Create Account</Link>
     </div>
   );
 }
