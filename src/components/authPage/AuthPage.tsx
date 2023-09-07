@@ -17,23 +17,6 @@ function AuthPage() {
     signupDetails = { ...signupDetails, [property]: value };
     console.log(signupDetails);
   };
-  const translateAuthScreen = (
-    display: "signup" | "login" | "forgotpassword"
-  ) => {
-    if (display === "signup") {
-      document
-        .querySelector("#authScreen")
-        ?.setAttribute("style", "translate: 0px 0px");
-    } else if (display === "login") {
-      document
-        .querySelector("#authScreen")
-        ?.setAttribute("style", "translate: 0px -33.33%");
-    } else if (display === "forgotpassword") {
-      document
-        .querySelector("#authScreen")
-        ?.setAttribute("style", "translate: 0px -66.66%");
-    }
-  };
 
   const validateSignup = () => {
     const nameRegex = /^[A-Za-z'-]+$/;
@@ -49,25 +32,31 @@ function AuthPage() {
   };
 
   useEffect(() => {
-    if (location.pathname === "/signup") translateAuthScreen("signup");
-    else if (location.pathname === "/login") translateAuthScreen("login");
-    else if (location.pathname === "/forgotpassword")
-      translateAuthScreen("forgotpassword");
+    // if (location.pathname === "/signup") translateAuthScreen("signup");
+    // else if (location.pathname === "/login") translateAuthScreen("login");
+    // else if (location.pathname === "/forgotpassword")
+    //   translateAuthScreen("forgotpassword");
+    console.log(location.pathname);
   }, [location.key]);
 
   return (
     <div
-      className="w-100 bgImage overflow-hidden"
+      className="w-100 bgImage smooth"
       style={{ backgroundImage: `url(${backImage})` }}
     >
-      <div id="authScreen" className="d-flex flex-column w-100">
+      <div className="d-flex w-100 smooth" style={{ minHeight: "100vh" }}>
         <div
           id="signupScreen"
-          className="d-flex justify-content-start align-items-center"
-          style={{ height: "100vh" }}
+          className={
+            `${location.pathname === "/signup" ? "" : "d-none"} ` +
+            "w-custom smooth"
+          }
+          style={{
+            minHeight: "100vh",
+          }}
         >
-          <div className="card rounded-0 border-0 w-custom h-100">
-            <div className="card-body d-flex flex-column justify-content-center p-5 gap-3">
+          <div className="card rounded-0 border-0 w-100 h-100">
+            <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
                 className="img-thumbnail align-self-center"
                 style={{ width: "100px" }}
@@ -136,7 +125,10 @@ function AuthPage() {
                   <button className="btn btn-primary w-100 rounded-1">
                     Sign up
                   </button>
-                  <Link to="/login" className="small text-decoration-none mt-1">
+                  <Link
+                    to="/login"
+                    className="small text-center text-decoration-none mt-1"
+                  >
                     Already have an account
                   </Link>
                 </div>
@@ -146,11 +138,14 @@ function AuthPage() {
         </div>
         <div
           id="loginScreen"
-          className="d-flex justify-content-start align-items-center"
-          style={{ height: "100vh" }}
+          className={
+            `${location.pathname === "/login" ? "" : "d-none"} ` +
+            "w-custom smooth"
+          }
+          style={{ minHeight: "100vh" }}
         >
-          <div className="card rounded-0 border-0 w-custom h-100">
-            <div className="card-body d-flex flex-column justify-content-center p-5 gap-3">
+          <div className="card rounded-0 border-0 w-100 h-100">
+            <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
                 className="img-thumbnail align-self-center"
                 style={{ width: "100px" }}
@@ -168,7 +163,7 @@ function AuthPage() {
                   <input className="form-control-custom" type="password" />
                   <Link
                     to="/forgotpassword"
-                    className="small text-decoration-none mt-1 float-end"
+                    className="small float-end text-decoration-none mt-1"
                   >
                     Forgot Password
                   </Link>
@@ -179,7 +174,7 @@ function AuthPage() {
                   </button>
                   <Link
                     to="/signup"
-                    className="btn btn-sm text-primary p-0 mt-1 border-0"
+                    className="small text-center text-decoration-none mt-1"
                   >
                     Create an Account
                   </Link>
@@ -190,11 +185,14 @@ function AuthPage() {
         </div>
         <div
           id="forgotpasswordScreen"
-          className="d-flex justify-content-start align-items-center"
-          style={{ height: "100vh" }}
+          className={
+            `${location.pathname === "/forgotpassword" ? "" : "d-none"} ` +
+            "w-custom smooth"
+          }
+          style={{ minHeight: "100vh" }}
         >
-          <div className="card rounded-0 border-0 w-custom h-100">
-            <div className="card-body d-flex flex-column justify-content-center p-5 gap-3">
+          <div className="card rounded-0 border-0 w-100 h-100">
+            <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
                 className="img-thumbnail align-self-center"
                 style={{ width: "100px" }}
@@ -216,7 +214,7 @@ function AuthPage() {
                   </button>
                   <Link
                     to="/login"
-                    className="btn btn-sm text-primary p-0 mt-1 border-0"
+                    className="small text-center text-decoration-none mt-1"
                   >
                     Back
                   </Link>

@@ -1,5 +1,6 @@
 .bgImage {
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -25,7 +26,7 @@
   height: 100%;
 }
 
-#authScreen {
+.smooth {
   transition: all 0.5s ease-in-out; /* This sets the transition for all properties over 0.3 seconds with an ease-in-out timing function */
 }
 
@@ -61,13 +62,5 @@
 @media (min-width: 1200px) {
   .w-custom {
     width: 30%;
-  }
-}
-
-@media (orientation: landscape) {
-  #signupScreen,
-  #loginScreen,
-  #forgotpasswordScreen {
-    height: 100vw; /* Set the height to 100% of viewport width */
   }
 }
