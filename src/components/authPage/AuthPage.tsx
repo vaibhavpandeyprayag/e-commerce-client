@@ -62,6 +62,7 @@ function AuthPage() {
     >
       <div id="authScreen" className="d-flex flex-column w-100">
         <div
+          id="signupScreen"
           className="d-flex justify-content-start align-items-center"
           style={{ height: "100vh" }}
         >
@@ -144,6 +145,7 @@ function AuthPage() {
           </div>
         </div>
         <div
+          id="loginScreen"
           className="d-flex justify-content-start align-items-center"
           style={{ height: "100vh" }}
         >
@@ -187,6 +189,7 @@ function AuthPage() {
           </div>
         </div>
         <div
+          id="forgotpasswordScreen"
           className="d-flex justify-content-start align-items-center"
           style={{ height: "100vh" }}
         >

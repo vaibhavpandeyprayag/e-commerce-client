@@ -63,3 +63,11 @@
     width: 30%;
   }
 }
+
+@media (orientation: landscape) {
+  #signupScreen,
+  #loginScreen,
+  #forgotpasswordScreen {
+    height: 100vw; /* Set the height to 100% of viewport width */
+  }
+}
