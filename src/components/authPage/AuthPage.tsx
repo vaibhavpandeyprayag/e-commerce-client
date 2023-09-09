@@ -2,42 +2,132 @@ import "./AuthPage.css";
 import backImage from "../../resources/signupBackImage.jpg";
 import websiteLogo from "../../resources/websiteTempLogo.jpg";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CryptoJS from "crypto-js";
 
 function AuthPage() {
   const location = useLocation();
-  const BASE_URL = process.env.REACT_APP_BASE_URL as string;
-  var signupDetails: any = {
+  const [signupDetails, setSignupDetails] = useState({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
-  };
-  const updateSignupDetails = (property: string, value: string) => {
-    signupDetails = { ...signupDetails, [property]: value };
-    console.log(signupDetails);
-  };
+  });
+  const [signupBlurDetails, setSignupBlurDetails] = useState({
+    firstname: false,
+    lastname: false,
+    email: false,
+    password: false,
+  });
+  const [error, setError] = useState("");
+  const BASE_URL = process.env.REACT_APP_BASE_URL as string;
+  const CRYPTO_KEY = process.env.REACT_APP_CRYPTO_KEY as string;
+
+  // var signupDetails: any = {
+  //   firstname: "",
+  //   lastname: "",
+  //   email: "",
+  //   password: "",
+  // };
+  // const updateSignupDetails = (property: string, value: string) => {
+  //   signupDetails = { ...signupDetails, [property]: value };
+  //   console.log(signupDetails);
+  // };
 
   const validateSignup = () => {
     const nameRegex = /^[A-Za-z'-]+$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+
+    setError("");
+    if (
+      signupBlurDetails.firstname === true &&
+      signupDetails.firstname === ""
+    ) {
+      setError("Firstname is required");
+      return false;
+    }
+    if (
+      signupBlurDetails.firstname === true &&
+      !nameRegex.test(signupDetails.firstname)
+    ) {
+      setError("Firstname can have only letters with no spaces");
+      return false;
+    }
+    if (signupBlurDetails.lastname === true && signupDetails.lastname === "") {
+      setError("Lastname is required");
+      return false;
+    }
+    if (
+      signupBlurDetails.lastname === true &&
+      !nameRegex.test(signupDetails.lastname)
+    ) {
+      setError("Lastname can have only letters with no spaces");
+      return false;
+    }
+    if (signupBlurDetails.email === true && signupDetails.email === "") {
+      setError("Email is required");
+      return false;
+    }
+    if (
+      signupBlurDetails.email === true &&
+      !emailRegex.test(signupDetails.email)
+    ) {
+      setError("Enter a valid email.");
+      return false;
+    }
+    if (signupBlurDetails.password === true && signupDetails.password === "") {
+      setError("Password is required");
+      return false;
+    }
+    if (
+      signupBlurDetails.password === true &&
+      !passwordRegex.test(signupDetails.password)
+    ) {
+      setError(
+        "Password must contain at least 8 characters, uppercase letters (A-Z), lowercase letters (a-z), numbers (0-9), special characters"
+      );
+      return false;
+    }
+    return true;
   };
   const validateLogin = () => {};
   const signup = () => {
-    console.log(BASE_URL);
-    console.log(location.pathname);
-    // axios.post(BASE_URL, {hello: "world"})
+    console.log("signup() called.");
+    if (!validateSignup()) return;
+    console.log("signup form validated");
+    let payload = {
+      firstname: signupDetails.firstname,
+      lastname: signupDetails.lastname,
+      email: signupDetails.email,
+      password: CryptoJS.AES.encrypt(
+        signupDetails.password,
+        CRYPTO_KEY
+      ).toString(),
+    };
+    fetch(`${BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((rawRes) => rawRes.json())
+      .then((res) => console.log(res));
   };
 
   useEffect(() => {
+    validateSignup();
     // if (location.pathname === "/signup") translateAuthScreen("signup");
     // else if (location.pathname === "/login") translateAuthScreen("login");
     // else if (location.pathname === "/forgotpassword")
     //   translateAuthScreen("forgotpassword");
-    console.log(location.pathname);
-  }, [location.key]);
+
+    console.log(location.pathname, "rendered");
+  }, [signupDetails]);
 
   return (
     <div
@@ -70,12 +160,18 @@ function AuthPage() {
                   <input
                     name="firstname"
                     className="form-control-custom"
-                    onInput={(e) =>
-                      updateSignupDetails(
-                        e.currentTarget.name,
-                        e.currentTarget.value
-                      )
-                    }
+                    value={signupDetails.firstname}
+                    onInput={(e) => {
+                      const value = e.currentTarget.value;
+                      setSignupDetails((prevState) => ({
+                        ...prevState,
+                        firstname: value,
+                      }));
+                      setSignupBlurDetails((prevState) => ({
+                        ...prevState,
+                        firstname: true,
+                      }));
+                    }}
                     placeholder=""
                   />
                 </div>
@@ -84,12 +180,17 @@ function AuthPage() {
                   <input
                     name="lastname"
                     className="form-control-custom"
-                    onInput={(e) =>
-                      updateSignupDetails(
-                        e.currentTarget.name,
-                        e.currentTarget.value
-                      )
-                    }
+                    onInput={(e) => {
+                      const value = e.currentTarget.value;
+                      setSignupDetails((prevState) => ({
+                        ...prevState,
+                        lastname: value,
+                      }));
+                      setSignupBlurDetails((prevState) => ({
+                        ...prevState,
+                        lastname: true,
+                      }));
+                    }}
                     placeholder=""
                   />
                 </div>
@@ -98,12 +199,17 @@ function AuthPage() {
                   <input
                     name="email"
                     className="form-control-custom"
-                    onInput={(e) =>
-                      updateSignupDetails(
-                        e.currentTarget.name,
-                        e.currentTarget.value
-                      )
-                    }
+                    onInput={(e) => {
+                      const value = e.currentTarget.value;
+                      setSignupDetails((prevState) => ({
+                        ...prevState,
+                        email: value,
+                      }));
+                      setSignupBlurDetails((prevState) => ({
+                        ...prevState,
+                        email: true,
+                      }));
+                    }}
                     type="email"
                   />
                 </div>
@@ -112,17 +218,41 @@ function AuthPage() {
                   <input
                     name="password"
                     className="form-control-custom"
-                    onInput={(e) =>
-                      updateSignupDetails(
-                        e.currentTarget.name,
-                        e.currentTarget.value
-                      )
-                    }
+                    onInput={(e) => {
+                      const value = e.currentTarget.value;
+                      setSignupDetails((prevState) => ({
+                        ...prevState,
+                        password: value,
+                      }));
+                      setSignupBlurDetails((prevState) => ({
+                        ...prevState,
+                        password: true,
+                      }));
+                    }}
                     type="password"
                   />
                 </div>
-                <div className="d-flex flex-column mt-5">
-                  <button className="btn btn-primary w-100 rounded-1">
+                {error && (
+                  <div className="d-flex justify-content-start align-items-center gap-3 rounded-2 bg-danger-subtle text-danger w-100 p-2">
+                    <FontAwesomeIcon
+                      style={{ width: "25px", height: "25px" }}
+                      icon="exclamation-circle"
+                    />
+                    {error}
+                  </div>
+                )}
+                <div className="d-flex flex-column">
+                  <button
+                    className="btn btn-primary w-100 rounded-1"
+                    onClick={() => {
+                      // The following 4 lines mutate a state which is incorrect way of updating state, but signup() depends on signupBlurDetails.
+                      signupBlurDetails.firstname = true;
+                      signupBlurDetails.lastname = true;
+                      signupBlurDetails.email = true;
+                      signupBlurDetails.password = true;
+                      signup();
+                    }}
+                  >
                     Sign up
                   </button>
                   <Link
