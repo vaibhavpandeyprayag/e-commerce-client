@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CryptoJS from "crypto-js";
+import { encrypt } from "../../crypto";
 
 function AuthPage() {
   const location = useLocation();
@@ -102,10 +103,7 @@ function AuthPage() {
       firstname: signupDetails.firstname,
       lastname: signupDetails.lastname,
       email: signupDetails.email,
-      password: CryptoJS.AES.encrypt(
-        signupDetails.password,
-        CRYPTO_KEY
-      ).toString(),
+      password: encrypt(signupDetails.password),
     };
     fetch(`${BASE_URL}/signup`, {
       method: "POST",
