@@ -1,13 +1,20 @@
 import "./AuthPage.css";
 import backImage from "../../resources/signupBackImage.jpg";
 import websiteLogo from "../../resources/websiteTempLogo.jpg";
-import { Link, useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { decrypt, encrypt } from "../../crypto";
+import { APIResponse } from "../../types";
 
 function AuthPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [signupDetails, setSignupDetails] = useState({
     firstname: "",
     lastname: "",
@@ -101,7 +108,6 @@ function AuthPage() {
     fetch(`${BASE_URL}/auth/signup`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
@@ -140,13 +146,23 @@ function AuthPage() {
     fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-    })
-      .then((rawRes) => rawRes.json())
-      .then((res) => console.log(res));
+    }).then(async (httpRes) => {
+      console.log(httpRes);
+      const res: APIResponse = await httpRes.json();
+      if (httpRes.ok) {
+        console.log("res is ok");
+        localStorage.setItem("user", res.data.user);
+        navigate("/home");
+      } else {
+        console.log("res is not ok");
+        if (httpRes.status === 401) {
+          alert(res.message);
+        }
+      }
+    });
   };
 
   useEffect(() => {
