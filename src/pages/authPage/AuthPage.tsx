@@ -1,20 +1,16 @@
 import "./AuthPage.css";
 import backImage from "../../resources/signupBackImage.jpg";
 import websiteLogo from "../../resources/websiteTempLogo.jpg";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { decrypt, encrypt } from "../../crypto";
-import { APIResponse } from "../../types";
+import { encrypt } from "../../crypto";
+import { APIResponse, BASE_URL, loggedIn } from "../../sharedExports";
 
 function AuthPage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [prevPathname, setPrevPathname] = useState("/auth/login");
   const [signupDetails, setSignupDetails] = useState({
     firstname: "",
     lastname: "",
@@ -37,7 +33,6 @@ function AuthPage() {
   });
   const [signupError, setSignupError] = useState("");
   const [loginError, setLoginError] = useState("");
-  const BASE_URL = process.env.REACT_APP_BASE_URL as string;
 
   const validateSignup = () => {
     const nameRegex = /^[A-Za-z'-]+$/;
@@ -111,9 +106,17 @@ function AuthPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-    })
-      .then((rawRes) => rawRes.json())
-      .then((res) => console.log(res));
+    }).then(async (httpRes) => {
+      console.log(httpRes);
+      const res: APIResponse = await httpRes.json();
+      if (httpRes.ok) {
+        console.log("res is ok");
+        console.log(res);
+      } else {
+        console.log("res is not ok");
+        alert(res.message);
+      }
+    });
   };
   const validateLogin = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -149,34 +152,38 @@ function AuthPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
-    }).then(async (httpRes) => {
-      console.log(httpRes);
-      const res: APIResponse = await httpRes.json();
-      if (httpRes.ok) {
-        console.log("res is ok");
+    })
+      .then((httpRes) => {
+        console.log(httpRes);
+        return httpRes.json();
+      })
+      .then((res) => {
+        console.log(res);
         localStorage.setItem("user", res.data.user);
         navigate("/home");
-      } else {
-        console.log("res is not ok");
-        if (httpRes.status === 401) {
-          alert(res.message);
-        }
-      }
-    });
+      });
   };
 
   useEffect(() => {
+    console.log("auth page rendered 1st time.");
+    let token = localStorage.getItem("user") as string;
+    if (token != null) {
+      loggedIn(token).then((isLoggedIn) => {
+        if (isLoggedIn) {
+          console.log("already logged in.");
+          navigate("/home");
+        } else {
+          console.log("Session expired");
+          localStorage.removeItem("user");
+        }
+      });
+    } else console.log("null token");
+  }, []);
+
+  useEffect(() => {
     if (location.pathname === "/auth/signup") validateSignup();
-    if (location.pathname === "/auth/login") validateLogin();
-
-    // if (location.pathname === "/signup") translateAuthScreen("signup");
-    // else if (location.pathname === "/login") translateAuthScreen("login");
-    // else if (location.pathname === "/forgotpassword")
-    //   translateAuthScreen("forgotpassword");
-
-    console.log(location.pathname, "rendered");
+    else if (location.pathname === "/auth/login") validateLogin();
   }, [signupDetails, loginDetails]);
-
   return (
     <div
       className="w-100 bgImage smooth"
@@ -201,6 +208,7 @@ function AuthPage() {
                 alt="logo"
                 src={websiteLogo}
               />
+
               <h5 className="card-title text-center">Create your Account</h5>
               <div className="d-flex flex-column mt-3 gap-2">
                 <div>
@@ -293,11 +301,12 @@ function AuthPage() {
                   <button
                     className="btn btn-primary w-100 rounded-1"
                     onClick={() => {
-                      // The following 4 lines mutate a state which is incorrect way of updating state, but validateSignup() depends on signupBlurDetails.
-                      signupBlurDetails.firstname = true;
-                      signupBlurDetails.lastname = true;
-                      signupBlurDetails.email = true;
-                      signupBlurDetails.password = true;
+                      setSignupBlurDetails((prevState) => ({
+                        firstname: true,
+                        lastname: true,
+                        email: true,
+                        password: true,
+                      }));
                       signup();
                     }}
                   >
@@ -378,9 +387,10 @@ function AuthPage() {
                   <button
                     className="btn btn-primary w-100 rounded-1"
                     onClick={() => {
-                      // The following 4 lines mutate a state which is incorrect way of updating state, but validateLogin() depends on loginBlurDetails.
-                      loginBlurDetails.email = true;
-                      loginBlurDetails.password = true;
+                      setLoginBlurDetails((prevState) => ({
+                        email: true,
+                        password: true,
+                      }));
                       login();
                     }}
                   >
