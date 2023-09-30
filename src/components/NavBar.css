@@ -1,0 +1,59 @@
+.form-control-custom {
+  width: 100%;
+  color: black;
+  background-color: transparent;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid darkgray;
+  padding: 0.3rem 1.7rem 0.3rem 0.5rem;
+  border-radius: 2px;
+  outline: 0;
+}
+
+.w-custom {
+  width: 100%;
+}
+
+.h-custom {
+  height: 100%;
+}
+
+.smooth {
+  transition: all 0.5s ease-in-out; /* This sets the transition for all properties over 0.3 seconds with an ease-in-out timing function */
+}
+
+/* sm */
+@media (min-width: 576px) {
+  .w-custom {
+    width: 100%;
+  }
+  .h-custom {
+    height: auto;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .w-custom {
+    width: 80%;
+  }
+
+  .h-custom {
+    height: auto;
+  }
+}
+
+/* lg */
+@media (min-width: 992px) {
+  .w-custom {
+    width: 60%;
+  }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+  .w-custom {
+    width: 50%;
+  }
+}
