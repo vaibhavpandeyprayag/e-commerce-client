@@ -1,4 +1,4 @@
-import "./AuthPage.css";
+import css from "./AuthPage.module.css";
 import backImage from "../../resources/signupBackImage.jpg";
 import websiteLogo from "../../resources/websiteTempLogo.jpg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -153,31 +153,32 @@ function AuthPage() {
       },
       body: JSON.stringify(payload),
     })
-      .then((httpRes) => {
+      .then(async (httpRes) => {
         console.log(httpRes);
-        return httpRes.json();
-      })
-      .then((res) => {
+        const res: APIResponse = await httpRes.json();
         console.log(res);
-        localStorage.setItem("user", res.data.user);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/home");
+      })
+      .catch((error: Error) => {
+        console.log("Network response was not ok.", error.message);
       });
   };
 
   useEffect(() => {
-    console.log("auth page rendered 1st time.");
+    console.log("Auth page rendered 1st time.");
     let token = localStorage.getItem("user") as string;
     if (token != null) {
       loggedIn(token).then((isLoggedIn) => {
         if (isLoggedIn) {
-          console.log("already logged in.");
+          console.log("Already logged in.");
           navigate("/home");
         } else {
           console.log("Session expired");
           localStorage.removeItem("user");
         }
       });
-    } else console.log("null token");
+    } else console.log("Null token");
   }, []);
 
   useEffect(() => {
@@ -186,16 +187,15 @@ function AuthPage() {
   }, [signupDetails, loginDetails]);
   return (
     <div
-      className="w-100 bgImage smooth"
+      className={`w-100 smooth ${css.bgImage}`}
       style={{ backgroundImage: `url(${backImage})` }}
     >
       <div className="d-flex w-100 smooth" style={{ minHeight: "100vh" }}>
         <div
           id="signupScreen"
-          className={
-            `${location.pathname === "/auth/signup" ? "" : "d-none"} ` +
-            "w-custom smooth"
-          }
+          className={`${location.pathname === "/auth/signup" ? "" : "d-none"} ${
+            css.wCustom
+          } ${css.smooth}`}
           style={{
             minHeight: "100vh",
           }}
@@ -203,7 +203,7 @@ function AuthPage() {
           <div className="card rounded-0 border-0 w-100 h-100">
             <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
-                className="img-thumbnail align-self-center"
+                className="border rounded-circle align-self-center"
                 style={{ width: "100px" }}
                 alt="logo"
                 src={websiteLogo}
@@ -215,7 +215,7 @@ function AuthPage() {
                   <label className="text-secondary">First Name</label>
                   <input
                     name="firstname"
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     value={signupDetails.firstname}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
@@ -235,7 +235,7 @@ function AuthPage() {
                   <label className="text-secondary">Last Name</label>
                   <input
                     name="lastname"
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
                       setSignupDetails((prevState) => ({
@@ -254,7 +254,7 @@ function AuthPage() {
                   <label className="text-secondary">Email</label>
                   <input
                     name="email"
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
                       setSignupDetails((prevState) => ({
@@ -273,7 +273,7 @@ function AuthPage() {
                   <label className="text-secondary">Password</label>
                   <input
                     name="password"
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
                       setSignupDetails((prevState) => ({
@@ -325,16 +325,15 @@ function AuthPage() {
         </div>
         <div
           id="loginScreen"
-          className={
-            `${location.pathname === "/auth/login" ? "" : "d-none"} ` +
-            "w-custom smooth"
-          }
+          className={`${location.pathname === "/auth/login" ? "" : "d-none"} ${
+            css.wCustom
+          } ${css.smooth}`}
           style={{ minHeight: "100vh" }}
         >
           <div className="card rounded-0 border-0 w-100 h-100">
             <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
-                className="img-thumbnail align-self-center"
+                className="border rounded-circle align-self-center"
                 style={{ width: "100px" }}
                 alt="logo"
                 src={websiteLogo}
@@ -344,7 +343,7 @@ function AuthPage() {
                 <div>
                   <label className="text-secondary">Email</label>
                   <input
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
                       setLoginDetails((prevState) => ({
@@ -362,7 +361,7 @@ function AuthPage() {
                 <div>
                   <label className="text-secondary">Password</label>
                   <input
-                    className="form-control-custom"
+                    className={`${css.formControlCustom}`}
                     onInput={(e) => {
                       const value = e.currentTarget.value;
                       setLoginDetails((prevState) => ({
@@ -409,16 +408,15 @@ function AuthPage() {
         </div>
         <div
           id="forgotpasswordScreen"
-          className={
-            `${location.pathname === "/auth/forgotpassword" ? "" : "d-none"} ` +
-            "w-custom smooth"
-          }
+          className={`${
+            location.pathname === "/auth/forgotpassword" ? "" : "d-none"
+          } ${css.wCustom} ${css.smooth}`}
           style={{ minHeight: "100vh" }}
         >
           <div className="card rounded-0 border-0 w-100 h-100">
             <div className="card-body d-flex flex-column justify-content-start justify-content-lg-center p-5 gap-3">
               <img
-                className="img-thumbnail align-self-center"
+                className="border rounded-circle align-self-center"
                 style={{ width: "100px" }}
                 alt="logo"
                 src={websiteLogo}
@@ -430,7 +428,7 @@ function AuthPage() {
                     Enter your Email and we will send you an OTP to reset the
                     password.
                   </label>
-                  <input className="form-control-custom" type="email" />
+                  <input className={`${css.formControlCustom}`} type="email" />
                 </div>
                 <div className="d-flex flex-column mt-5">
                   <button className="btn btn-primary w-100 rounded-1">

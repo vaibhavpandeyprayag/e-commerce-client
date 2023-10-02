@@ -4,20 +4,21 @@ import { loggedIn } from "../sharedExports";
 
 function Home() {
   const navigate = useNavigate();
+
   useEffect(() => {
     // const token = localStorage.getItem("user");
     // if (token !== null)
     //   loggedIn(token).then((isLoggedIn) => {
     //     if (isLoggedIn) {
-    //       console.log("already logged in.");
+    //       console.log("Already logged in.");
     //     } else {
     //       console.log("Session expired");
-    //       navigate("/auth/login");
+    //       navigate("/");
     //     }
     //   });
     // else {
-    //   console.log("null token");
-    //   navigate("/auth/login");
+    //   console.log("Null token");
+    //   navigate("/");
     // }
   }, []);
   return (

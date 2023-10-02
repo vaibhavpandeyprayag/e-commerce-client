@@ -1,0 +1,45 @@
+.formControlCustom {
+  width: 100%;
+  color: black;
+  background-color: transparent;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid darkgray;
+  padding: 0.3rem 1.7rem 0.3rem 0.5rem;
+  border-radius: 2px;
+  outline: 0;
+}
+
+.loginSignupLinks1 {
+  display: flex;
+  gap: 0.5rem;
+}
+.loginSignupLinks2 {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* sm */
+@media (min-width: 576px) {
+}
+
+/* md */
+@media (min-width: 768px) {
+  .loginSignupLinks1 {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .loginSignupLinks2 {
+    display: none;
+  }
+}
+
+/* lg */
+@media (min-width: 992px) {
+}
+
+/* xl */
+@media (min-width: 1200px) {
+}

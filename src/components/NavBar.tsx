@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import websiteLogo from "../resources/websiteTempLogo.jpg";
-import "./NavBar.css";
+import css from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,25 +8,43 @@ import {
   faHeart,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../contexts";
 
 function NavBar() {
+  const { authState, setAuthState } = useContext(AuthContext);
   useEffect(() => {
     console.log("NavBar rendered.");
+    console.log(authState);
   }, []);
   return (
-    <div className="w-custom">
-      <div className="d-flex justify-content-between align-items-center">
-        <Link to="/" className="text-decoration-none">
-          <img
-            className="rounded-5 me-2"
-            style={{ width: "3rem" }}
-            src={websiteLogo}
-          />
-          Buy Now
-        </Link>
-        <div className="d-flex align-items-center gap-3">
-          <div className="position-relative">
-            <input className="form-control-custom" placeholder="Search" />
+    <div className="container-md pt-4">
+      <div className="d-flex flex-md-row flex-column justify-content-between align-items-center">
+        <div className="d-flex w-100 justify-content-between align-items-baseline">
+          <Link to="/" className="text-decoration-none">
+            <img
+              className="rounded-circle me-2"
+              style={{ width: "3rem" }}
+              src={websiteLogo}
+            />
+            Buy Now
+            {authState.firstname}
+          </Link>
+          <div className={`${css.loginSignupLinks1}`}>
+            <Link to="/auth/login" className="text-black text-decoration-none">
+              Login
+            </Link>
+            <span>|</span>
+            <Link to="/auth/signup" className="text-black text-decoration-none">
+              Signup
+            </Link>
+          </div>
+        </div>
+        <div className="d-flex align-items-center gap-3 w-100">
+          <div className="position-relative flex-grow-1">
+            <input
+              className={`${css.formControlCustom}`}
+              placeholder="Search"
+            />
             <button className="position-absolute end-0 mt-1  btn p-0">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
@@ -37,6 +55,15 @@ function NavBar() {
           <Link to="/cart">
             <FontAwesomeIcon icon={faCartShopping} size="xl" />
           </Link>
+          <div className={`${css.loginSignupLinks2}`}>
+            <Link to="/auth/login" className="text-black text-decoration-none">
+              Login
+            </Link>
+            <span>|</span>
+            <Link to="/auth/signup" className="text-black text-decoration-none">
+              Signup
+            </Link>
+          </div>
         </div>
       </div>
       <div></div>

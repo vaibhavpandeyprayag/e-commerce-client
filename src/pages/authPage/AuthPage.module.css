@@ -1,22 +1,25 @@
-.form-control-custom {
+.bgImage {
+  /* height: 100vh; */
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.formControlCustom {
   width: 100%;
   color: black;
-  background-color: transparent;
   border-left: 0;
   border-top: 0;
   border-right: 0;
   border-bottom: 1px solid darkgray;
-  padding: 0.3rem 1.7rem 0.3rem 0.5rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
   border-radius: 2px;
   outline: 0;
 }
 
-.w-custom {
+.wCustom {
   width: 100%;
-}
-
-.h-custom {
-  height: 100%;
 }
 
 .smooth {
@@ -25,35 +28,28 @@
 
 /* sm */
 @media (min-width: 576px) {
-  .w-custom {
+  .wCustom {
     width: 100%;
-  }
-  .h-custom {
-    height: auto;
   }
 }
 
 /* md */
 @media (min-width: 768px) {
-  .w-custom {
-    width: 80%;
-  }
-
-  .h-custom {
-    height: auto;
+  .wCustom {
+    width: 100%;
   }
 }
 
 /* lg */
 @media (min-width: 992px) {
-  .w-custom {
-    width: 60%;
+  .wCustom {
+    width: 40%;
   }
 }
 
 /* xl */
 @media (min-width: 1200px) {
-  .w-custom {
-    width: 50%;
+  .wCustom {
+    width: 30%;
   }
 }

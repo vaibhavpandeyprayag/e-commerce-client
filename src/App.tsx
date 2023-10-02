@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
 import AuthPage from "./pages/authPage/AuthPage";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
