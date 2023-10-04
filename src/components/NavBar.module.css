@@ -21,6 +21,9 @@
 
 /* md */
 @media (min-width: 768px) {
+  .navBarTab {
+    background-color: transparent;
+  }
 }
 
 /* lg */

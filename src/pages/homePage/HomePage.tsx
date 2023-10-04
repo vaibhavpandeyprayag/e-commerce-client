@@ -61,13 +61,16 @@ function HomePage() {
           className="bg-black"
           style={{ height: "64px", overflow: "visible" }}
         >
-          <nav className="navbar navbar-expand-md">
-            <div className="container-lg d-flex justify-content-center">
-              <a className="navbar-brand m-0" style={{ fontSize: "16px" }}>
-                <CategoryMenu id={-1} name="home" title="home" />
-              </a>
+          <nav className="navbar navbar-expand-md p-0 h-100">
+            <div className="container-lg d-flex justify-content-center h-100">
               <button
-                className={`${css.hoverClass} ${css.toggleBtnClass} rounded-1  p-2 fw-bold`}
+                className="border-0 bg-transparent me-2 p-0 h-100"
+                style={{ fontSize: "16px" }}
+              >
+                <CategoryMenu id={-1} name="home" title="home" />
+              </button>
+              <button
+                className={`${css.hoverClass} ${css.toggleBtnClass} h-100 p-2 fw-bold`}
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarNav"
                 aria-controls="navbarNav"
@@ -77,7 +80,10 @@ function HomePage() {
                 VIEW CATEGORIES
                 {/* <span className="navbar-toggler-icon"></span> */}
               </button>
-              <div className="collapse navbar-collapse bg-black" id="navbarNav">
+              <div
+                className={`collapse navbar-collapse bg-black ${css.navBarCollapseWidthCustom}`}
+                id="navbarNav"
+              >
                 <ul className="navbar-nav">
                   {categories.map((category) => (
                     <CategoryMenu

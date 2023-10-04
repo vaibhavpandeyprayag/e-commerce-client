@@ -18,6 +18,10 @@
   background-color: white;
 }
 
+.navBarCollapseWidthCustom {
+  min-width: 100vw;
+}
+
 @media (min-width: 768px) {
   .marginTopCustom {
     margin-top: 88px;
@@ -27,5 +31,9 @@
     display: none;
     border: none;
     outline: none;
+  }
+
+  .navBarCollapseWidthCustom {
+    min-width: 0vw;
   }
 }

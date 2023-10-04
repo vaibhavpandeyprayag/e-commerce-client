@@ -33,7 +33,8 @@ function NavBar() {
             <span>Buy Now</span>
           </Link>
         </div>
-        <div className="col-md-9 d-flex align-items-center pe-3 gap-1 mb-2 mb-md-0">
+        <div className="col-md-1 col-lg-3"></div>
+        <div className="col-md-8 col-lg-6 d-flex align-items-center pe-3 gap-1 mb-2 mb-md-0">
           <div className="position-relative flex-grow-1">
             <input
               className={`${css.formControlCustom}`}
@@ -63,7 +64,7 @@ function NavBar() {
               />
             </Link>
           )}
-          <AvatarTab breakpoint="abovemd" />
+          <AvatarTab />
         </div>
       </div>
     </div>
