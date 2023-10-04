@@ -187,15 +187,15 @@ function AuthPage() {
   }, [signupDetails, loginDetails]);
   return (
     <div
-      className={`w-100 smooth ${css.bgImage}`}
+      className={`w-100 ${css.bgImage}`}
       style={{ backgroundImage: `url(${backImage})` }}
     >
-      <div className="d-flex w-100 smooth" style={{ minHeight: "100vh" }}>
+      <div className="d-flex w-100" style={{ minHeight: "100vh" }}>
         <div
           id="signupScreen"
           className={`${location.pathname === "/auth/signup" ? "" : "d-none"} ${
             css.wCustom
-          } ${css.smooth}`}
+          } `}
           style={{
             minHeight: "100vh",
           }}
@@ -327,7 +327,7 @@ function AuthPage() {
           id="loginScreen"
           className={`${location.pathname === "/auth/login" ? "" : "d-none"} ${
             css.wCustom
-          } ${css.smooth}`}
+          } `}
           style={{ minHeight: "100vh" }}
         >
           <div className="card rounded-0 border-0 w-100 h-100">
@@ -410,7 +410,7 @@ function AuthPage() {
           id="forgotpasswordScreen"
           className={`${
             location.pathname === "/auth/forgotpassword" ? "" : "d-none"
-          } ${css.wCustom} ${css.smooth}`}
+          } ${css.wCustom} `}
           style={{ minHeight: "100vh" }}
         >
           <div className="card rounded-0 border-0 w-100 h-100">

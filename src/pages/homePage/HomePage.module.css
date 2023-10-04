@@ -1,0 +1,31 @@
+.marginTopCustom {
+  margin-top: 134px;
+}
+
+.toggleBtnClass {
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.hoverClass {
+  color: white;
+  background-color: transparent;
+}
+
+.hoverClass:hover {
+  color: black;
+  background-color: white;
+}
+
+@media (min-width: 768px) {
+  .marginTopCustom {
+    margin-top: 88px;
+  }
+
+  .toggleBtnClass {
+    display: none;
+    border: none;
+    outline: none;
+  }
+}

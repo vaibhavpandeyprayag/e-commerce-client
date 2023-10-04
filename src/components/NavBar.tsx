@@ -9,6 +9,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../contexts";
+import AvatarTab from "./AvatarTab";
 
 function NavBar() {
   const { authState, setAuthState } = useContext(AuthContext);
@@ -17,56 +18,54 @@ function NavBar() {
     console.log(authState);
   }, []);
   return (
-    <div className="container-md pt-4">
-      <div className="d-flex flex-md-row flex-column justify-content-between align-items-center">
-        <div className="d-flex w-100 justify-content-between align-items-baseline">
-          <Link to="/" className="text-decoration-none">
+    <div className="container-lg pt-4">
+      <div className="row">
+        <div className="col-md-3 d-flex justify-content-center justify-content-md-start">
+          <Link
+            to="/"
+            className="d-flex align-items-center pb-3 p-md-2 text-decoration-none"
+          >
             <img
               className="rounded-circle me-2"
               style={{ width: "3rem" }}
               src={websiteLogo}
             />
-            Buy Now
-            {authState.firstname}
+            <span>Buy Now</span>
           </Link>
-          <div className={`${css.loginSignupLinks1}`}>
-            <Link to="/auth/login" className="text-black text-decoration-none">
-              Login
-            </Link>
-            <span>|</span>
-            <Link to="/auth/signup" className="text-black text-decoration-none">
-              Signup
-            </Link>
-          </div>
         </div>
-        <div className="d-flex align-items-center gap-3 w-100">
+        <div className="col-md-9 d-flex align-items-center pe-3 gap-1 mb-2 mb-md-0">
           <div className="position-relative flex-grow-1">
             <input
               className={`${css.formControlCustom}`}
               placeholder="Search"
             />
-            <button className="position-absolute end-0 mt-1  btn p-0">
+            <button
+              className={`${css.hoverClass}  position-absolute end-0 rounded-end-2 h-100 border-0 px-2`}
+            >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
           </div>
-          <Link to="/likedproductspage" className="">
-            <FontAwesomeIcon icon={faHeart} className="text-danger" size="xl" />
-          </Link>
-          <Link to="/cart">
-            <FontAwesomeIcon icon={faCartShopping} size="xl" />
-          </Link>
-          <div className={`${css.loginSignupLinks2}`}>
-            <Link to="/auth/login" className="text-black text-decoration-none">
-              Login
+          {authState.id !== -1 && (
+            <Link to="/likedproductspage" className="">
+              <FontAwesomeIcon
+                icon={faHeart}
+                className={`${css.hoverClass}  text-danger p-2 rounded-5`}
+                size="xl"
+              />
             </Link>
-            <span>|</span>
-            <Link to="/auth/signup" className="text-black text-decoration-none">
-              Signup
+          )}
+          {authState.id !== -1 && (
+            <Link to="/cart">
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                className={`${css.hoverClass}  p-2 rounded-5`}
+                size="xl"
+              />
             </Link>
-          </div>
+          )}
+          <AvatarTab breakpoint="abovemd" />
         </div>
       </div>
-      <div></div>
     </div>
   );
 }

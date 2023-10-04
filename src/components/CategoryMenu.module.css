@@ -1,0 +1,21 @@
+.homeClass {
+  color: rgb(13, 109, 253);
+  border-radius: 0.2rem;
+}
+.homeClass:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.xPaddingCustom {
+  padding: 0 0.9rem 0 0.9rem;
+}
+
+.hoverClass {
+  color: white;
+  background-color: transparent;
+}
+
+.hoverClass:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}

@@ -1,10 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loggedIn } from "../sharedExports";
+import CategoryMenu from "./CategtoryMenu";
 
 function Home() {
   const navigate = useNavigate();
-
+  const [activeCategory, setActiveCategory] = useState({
+    id: 1,
+    name: "phones",
+  });
   useEffect(() => {
     // const token = localStorage.getItem("user");
     // if (token !== null)
@@ -22,11 +26,8 @@ function Home() {
     // }
   }, []);
   return (
-    <div className="bg-dark text-light">
-      HOME
-      <Link to="/auth/login">Login</Link>
-      <Link to="/auth/signup">Create Account</Link>
-      <Link to="/cart">Cart</Link>
+    <div className="bg-success-subtle">
+      <div>HOME</div>
     </div>
   );
 }
