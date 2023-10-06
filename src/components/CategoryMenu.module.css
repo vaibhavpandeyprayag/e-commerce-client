@@ -1,6 +1,6 @@
 .homeClass {
   color: rgb(13, 109, 253);
-  background-color: transparent;
+  background-color: black;
 }
 .homeClass:hover {
   background-color: white;
@@ -12,10 +12,10 @@
 
 .hoverClass {
   color: white;
-  background-color: transparent;
+  background-color: black;
 }
 
 .hoverClass:hover {
   color: black;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }

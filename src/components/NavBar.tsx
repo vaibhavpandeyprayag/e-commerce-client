@@ -15,7 +15,6 @@ function NavBar() {
   const { authState, setAuthState } = useContext(AuthContext);
   useEffect(() => {
     console.log("NavBar rendered.");
-    console.log(authState);
   }, []);
   return (
     <div className="container-lg pt-4">
@@ -35,7 +34,7 @@ function NavBar() {
         </div>
         <div className="col-md-1 col-lg-3"></div>
         <div className="col-md-8 col-lg-6 d-flex align-items-center pe-3 gap-1 mb-2 mb-md-0">
-          <div className="position-relative flex-grow-1">
+          <div className="position-relative w-100">
             <input
               className={`${css.formControlCustom}`}
               placeholder="Search"

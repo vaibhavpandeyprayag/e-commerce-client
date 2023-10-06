@@ -27,7 +27,14 @@ function Home() {
   }, []);
   return (
     <div className="bg-success-subtle">
-      <div>HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
+      <div className="p-5">HOME</div>
     </div>
   );
 }

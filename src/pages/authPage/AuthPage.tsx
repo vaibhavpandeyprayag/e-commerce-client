@@ -107,11 +107,11 @@ function AuthPage() {
       },
       body: JSON.stringify(payload),
     }).then(async (httpRes) => {
-      console.log(httpRes);
+      // console.log(httpRes);
       const res: APIResponse = await httpRes.json();
       if (httpRes.ok) {
         console.log("res is ok");
-        console.log(res);
+        // console.log(res);
       } else {
         console.log("res is not ok");
         alert(res.message);
@@ -154,9 +154,9 @@ function AuthPage() {
       body: JSON.stringify(payload),
     })
       .then(async (httpRes) => {
-        console.log(httpRes);
+        // console.log(httpRes);
         const res: APIResponse = await httpRes.json();
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/home");
       })

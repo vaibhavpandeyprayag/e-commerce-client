@@ -29,7 +29,7 @@ function HomePage() {
   useEffect(() => {
     console.log("HomePage rendered.");
     const user = JSON.parse(localStorage.getItem("user") as string);
-    console.log(user);
+    // console.log(user);
     if (user !== null)
       loggedIn(user.token).then((isLoggedIn) => {
         if (isLoggedIn) {
@@ -49,6 +49,18 @@ function HomePage() {
       console.log("Null token");
       navigate("/");
     }
+
+    document.addEventListener("click", (event: Event) => {
+      const menuList = document.querySelector("#menucollapse") as any;
+      const menuBtn = document.querySelector("#menuBtn") as any;
+
+      if (menuList !== null && event.target !== menuBtn) {
+        // Hide the collapse element (if it's already expanded)
+        if (menuList.classList.contains("show")) {
+          menuBtn.click(); // Trigger a click on the button to hide the collapse element
+        }
+      }
+    });
   }, []);
 
   return (
@@ -57,46 +69,43 @@ function HomePage() {
         <NavBar></NavBar>
       </div>
       <div className={`${css.marginTopCustom}  w-100 z-1`}>
-        <div
-          className="bg-black"
-          style={{ height: "64px", overflow: "visible" }}
-        >
-          <nav className="navbar navbar-expand-md p-0 h-100">
-            <div className="container-lg d-flex justify-content-center h-100">
+        <div className="bg-black position-sticky" style={{ height: "64px" }}>
+          {/* <div className="bg-black"> */}
+          <div className="container-lg h-100 p-0">
+            <div className="d-flex justify-content-center justify-content-md-start gap-md-3 h-100">
+              <CategoryMenu id={-1} name="home" title="home" />
+              <div className="d-none d-md-flex">
+                {categories.map((category) => (
+                  <CategoryMenu
+                    id={category.id}
+                    name={category.name}
+                    title={category.title}
+                  />
+                ))}
+              </div>
               <button
-                className="border-0 bg-transparent me-2 p-0 h-100"
-                style={{ fontSize: "16px" }}
-              >
-                <CategoryMenu id={-1} name="home" title="home" />
-              </button>
-              <button
-                className={`${css.hoverClass} ${css.toggleBtnClass} h-100 p-2 fw-bold`}
+                id="menuBtn"
+                className={`${css.hoverClass}  d-md-none d-flex justify-content-center align-items-center fw-bold outline-0 border-0`}
                 data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
+                data-bs-target="#menucollapse"
                 aria-expanded="false"
-                aria-label="Toggle navigation"
+                aria-controls="menucollapse"
               >
                 VIEW CATEGORIES
-                {/* <span className="navbar-toggler-icon"></span> */}
               </button>
-              <div
-                className={`collapse navbar-collapse bg-black ${css.navBarCollapseWidthCustom}`}
-                id="navbarNav"
-              >
-                <ul className="navbar-nav">
-                  {categories.map((category) => (
-                    <CategoryMenu
-                      id={category.id}
-                      name={category.name}
-                      title={category.title}
-                    />
-                  ))}
-                </ul>
-              </div>
             </div>
-          </nav>
+            <div className="collapse h-100 d-md-none" id="menucollapse">
+              {categories.map((category) => (
+                <CategoryMenu
+                  id={category.id}
+                  name={category.name}
+                  title={category.title}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

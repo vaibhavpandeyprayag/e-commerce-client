@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import css from "./AvatarTab.module.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts";
 import {
   faGlobe,
@@ -11,20 +11,38 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AvatarTab() {
+  useEffect(() => {
+    document.addEventListener("click", (event: Event) => {
+      const profilePopup = document.querySelector("#profilecollapse") as any;
+      const profileBtn = document.querySelector("#profileBtn") as any;
+
+      if (
+        profilePopup !== null &&
+        !profilePopup.contains(event.target as any) &&
+        event.target !== profileBtn
+      ) {
+        // Hide the collapse element (if it's already expanded)
+        if (profilePopup.classList.contains("show")) {
+          profileBtn.click(); // Trigger a click on the button to hide the collapse element
+        }
+      }
+    });
+  }, []);
+
   const { authState, setAuthState } = useContext(AuthContext);
   return (
     <>
       {authState.id === -1 && (
-        <div>
+        <div className="">
           <Link
             to="/auth/login"
-            className={`${css.hoverClass}  text-black text-decoration-none px-2 py-1 rounded-1`}
+            className={`${css.hoverClass} text-black text-decoration-none px-2 py-2 rounded-1`}
           >
             Login
           </Link>
           <Link
             to="/auth/signup"
-            className={`${css.hoverClass}  text-black text-decoration-none px-2 py-1 rounded-1`}
+            className={`${css.hoverClass}  text-black text-decoration-none px-2 py-2 rounded-1`}
           >
             Signup
           </Link>
@@ -32,15 +50,21 @@ function AvatarTab() {
       )}
       {authState.id !== -1 && (
         <div
-          className="position-relative bg-success d-flex overflow-visible"
+          className="position-relative d-flex overflow-visible"
           style={{ height: "48px" }}
         >
           <button
-            className={`${css.hoverClass} d-flex border-0 gap-2 align-items-center rounded-2`}
+            id="profileBtn"
+            className={`${css.hoverClass} d-flex border-0 gap-2 align-items-center rounded-5`}
             data-bs-toggle="collapse"
-            data-bs-target="#collapseExample"
+            data-bs-target="#profilecollapse"
             aria-expanded="false"
-            aria-controls="collapseExample"
+            aria-controls="profilecollapse"
+            // onClick={() => {
+            //   document
+            //     .querySelector("#profilecollapse")
+            //     ?.classList.toggle("expanded");
+            // }}
           >
             <FontAwesomeIcon
               icon={faUser}
@@ -51,7 +75,7 @@ function AvatarTab() {
           <div
             className="collapse position-absolute top-100 end-0 bg-white "
             style={{ width: "500%" }}
-            id="collapseExample"
+            id="profilecollapse"
           >
             <div className="card">
               <div className="card-header text-center p-3">
