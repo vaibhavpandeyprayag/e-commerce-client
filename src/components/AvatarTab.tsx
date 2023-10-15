@@ -9,8 +9,9 @@ import {
   faUserGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AuthContextState } from "../sharedExports";
 
-function AvatarTab() {
+function AvatarTab({ id, firstname }: AuthContextState) {
   useEffect(() => {
     document.addEventListener("click", (event: Event) => {
       const profilePopup = document.querySelector("#profilecollapse") as any;
@@ -28,11 +29,9 @@ function AvatarTab() {
       }
     });
   }, []);
-
-  const { authState, setAuthState } = useContext(AuthContext);
   return (
     <>
-      {authState.id === -1 && (
+      {id === -1 && (
         <div className="">
           <Link
             to="/auth/login"
@@ -48,7 +47,7 @@ function AvatarTab() {
           </Link>
         </div>
       )}
-      {authState.id !== -1 && (
+      {id !== -1 && (
         <div
           className="position-relative d-flex overflow-visible"
           style={{ height: "48px" }}
@@ -70,17 +69,18 @@ function AvatarTab() {
               icon={faUser}
               size="lg"
               className="p-2 text-white bg-dark rounded-5"
+              style={{ width: "1.3rem" }}
             />
           </button>
           <div
-            className="collapse position-absolute top-100 end-0 bg-white "
+            className="collapse position-absolute top-100 end-0 "
             style={{ width: "500%" }}
             id="profilecollapse"
           >
             <div className="card">
               <div className="card-header text-center p-3">
                 <span>Hi</span>
-                <h6>{authState.firstname}</h6>
+                <h6>{firstname}</h6>
               </div>
               <div className="card-body p-0 w-auto">
                 <div className="row m-0">

@@ -16,14 +16,6 @@ function HomePage() {
     id: -1,
     firstname: "",
   });
-  const categories = [
-    { id: 1, name: "phones", title: "phones" },
-    { id: 2, name: "mensclothes", title: "men's clothes" },
-    { id: 3, name: "womensclothes", title: "women's clothes" },
-    { id: 4, name: "office", title: "office" },
-    { id: 5, name: "kids", title: "kids" },
-    { id: 6, name: "shoes", title: "shoes" },
-  ];
 
   const topCategoriesCount = 3;
   useEffect(() => {
@@ -49,63 +41,15 @@ function HomePage() {
       console.log("Null token");
       navigate("/");
     }
-
-    document.addEventListener("click", (event: Event) => {
-      const menuList = document.querySelector("#menucollapse") as any;
-      const menuBtn = document.querySelector("#menuBtn") as any;
-
-      if (menuList !== null && event.target !== menuBtn) {
-        // Hide the collapse element (if it's already expanded)
-        if (menuList.classList.contains("show")) {
-          menuBtn.click(); // Trigger a click on the button to hide the collapse element
-        }
-      }
-    });
   }, []);
 
   return (
     <AuthContext.Provider value={{ authState, setAuthState }}>
-      <div className={` fixed-top bg-body-secondary w-100 z-2`}>
+      <div className={`fixed-top bg-body-secondary w-100 z-2`}>
         <NavBar></NavBar>
       </div>
-      <div className={`${css.marginTopCustom}  w-100 z-1`}>
-        <div className="bg-black position-sticky" style={{ height: "64px" }}>
-          {/* <div className="bg-black"> */}
-          <div className="container-lg h-100 p-0">
-            <div className="d-flex justify-content-center justify-content-md-start gap-md-3 h-100">
-              <CategoryMenu id={-1} name="home" title="home" />
-              <div className="d-none d-md-flex">
-                {categories.map((category) => (
-                  <CategoryMenu
-                    id={category.id}
-                    name={category.name}
-                    title={category.title}
-                  />
-                ))}
-              </div>
-              <button
-                id="menuBtn"
-                className={`${css.hoverClass}  d-md-none d-flex justify-content-center align-items-center fw-bold outline-0 border-0`}
-                data-bs-toggle="collapse"
-                data-bs-target="#menucollapse"
-                aria-expanded="false"
-                aria-controls="menucollapse"
-              >
-                VIEW CATEGORIES
-              </button>
-            </div>
-            <div className="collapse h-100 d-md-none" id="menucollapse">
-              {categories.map((category) => (
-                <CategoryMenu
-                  id={category.id}
-                  name={category.name}
-                  title={category.title}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
 
+      <div className={`position-absolute w-100 z-1 ${css.topCustom}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />

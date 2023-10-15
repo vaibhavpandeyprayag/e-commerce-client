@@ -18,7 +18,6 @@ function CategoryMenu({
       className={`${id !== -1 ? css.hoverClass : css.homeClass}  ${
         css.xPaddingCustom
       } d-flex justify-content-center align-items-center fw-bold text-decoration-none text-uppercase ${classes}`}
-      style={{ minHeight: "100%" }}
     >
       {title}
     </Link>

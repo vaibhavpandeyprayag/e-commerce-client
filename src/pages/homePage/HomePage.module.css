@@ -1,5 +1,5 @@
-.marginTopCustom {
-  margin-top: 144px;
+.topCustom {
+  top: 128px;
 }
 
 .toggleBtnClass {
@@ -19,8 +19,8 @@
 }
 
 @media (min-width: 768px) {
-  .marginTopCustom {
-    margin-top: 88px;
+  .topCustom {
+    top: 144px;
   }
 
   .toggleBtnClass {

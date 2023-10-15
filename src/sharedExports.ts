@@ -6,7 +6,7 @@ export interface APIResponse {
   data?: any;
 }
 
-interface AuthContextState {
+export interface AuthContextState {
   id: number;
   firstname: string;
 }
