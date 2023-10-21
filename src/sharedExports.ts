@@ -18,7 +18,7 @@ export interface AuthContextType {
 // returns false if session has expired, or invalid user found
 export const loggedIn = async (token: string) => {
   try {
-    let httpRes = await fetch(`${BASE_URL}/auth/test`, {
+    let httpRes = await fetch(`${BASE_URL}/auth/verifyJwt`, {
       method: "POST",
       headers: { Authorization: token },
     });

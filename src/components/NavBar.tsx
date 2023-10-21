@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import websiteLogo from "../resources/websiteTempLogo.jpg";
 import css from "./NavBar.module.css";
 import { Link } from "react-router-dom";
@@ -8,26 +8,56 @@ import {
   faHeart,
   faMagnifyingGlass,
   faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../contexts";
 import AvatarTab from "./AvatarTab";
 import CategoryMenu from "./CategtoryMenu";
 import CategoryAccordion from "./CategoryAccordion";
+import { APIResponse, BASE_URL } from "../sharedExports";
 
 function NavBar() {
   const { authState, setAuthState } = useContext(AuthContext);
-  const categories = [
-    { id: 1, name: "phones", title: "phones" },
-    { id: 2, name: "mensclothes", title: "men's clothes" },
-    { id: 3, name: "womensclothes", title: "women's clothes" },
-    { id: 4, name: "office", title: "office" },
-    { id: 5, name: "kids", title: "kids" },
-    { id: 6, name: "shoes", title: "shoes" },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState({});
+
+  useEffect(() => {
+    console.log("subcategories fetched");
+  }, [subcategories]);
 
   useEffect(() => {
     console.log("NavBar rendered.");
+    const user = JSON.parse(localStorage.getItem("user") as string);
+    fetch(`${BASE_URL}/getCategories`).then(async (httpRes) => {
+      const res: APIResponse = await httpRes.json();
+      if (httpRes.ok) {
+        console.log("res is ok");
+        setCategories(res.data);
+        fetch(`${BASE_URL}/getSubcategories`).then(async (httpRes) => {
+          const res: APIResponse = await httpRes.json();
+          if (httpRes.ok) {
+            console.log("res is ok");
+            const subcategoriesByCat = res.data.reduce(
+              (acc: any, item: any) => {
+                let key = item.category_id;
+                let cummulativeData = acc[key] ? acc[key] : [];
+                return { ...acc, [key]: [...cummulativeData, item] };
+              },
+              {}
+            );
+            setSubcategories(subcategoriesByCat);
+          } else {
+            console.log("res is not ok");
+            alert(res.message);
+          }
+        });
+      } else {
+        console.log("res is not ok");
+        alert(res.message);
+      }
+    });
   }, []);
+
   return (
     <div>
       <div
@@ -35,33 +65,37 @@ function NavBar() {
         id="collapseCategoriesAccordion"
       >
         <div className="d-flex w-100 flex-column justify-content-evenly ">
-          <div className="d-flex justify-content-between align-items-center bg-white">
+          <div className="d-flex justify-content-between align-items-center bg-white pe-3">
             <CategoryMenu id={-1} name="home" title="home" classes=" py-3" />
             <label className="fw-semibold">Categories</label>
             <button
-              className="btn"
+              className="btn btn-outline-dark border"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseCategoriesAccordion"
               aria-expanded="false"
               aria-controls="collapseCategoriesAccordion"
             >
-              Close
+              <FontAwesomeIcon icon={faXmark} size="lg" />
             </button>
           </div>
           <div className="accordion" id="accordionMenu">
-            {categories.map((category) => (
+            {categories.map((category: any) => (
               <CategoryAccordion
+                key={category.id}
                 id={category.id}
                 name={category.name}
                 title={category.title}
+                subcategories={
+                  subcategories[category.id as keyof typeof subcategories]
+                }
               />
             ))}
           </div>
         </div>
       </div>
 
-      <div className="container-lg pt-4">
+      <div className="container-lg pt-1 pt-md-4">
         <div className="row">
           <div className="col-md-3 d-flex justify-content-between justify-content-md-start align-items-center">
             <button
@@ -129,8 +163,9 @@ function NavBar() {
           <div className="d-flex justify-content-start gap-3 h-100">
             <div className="d-flex w-100 justify-content-evenly ">
               <CategoryMenu id={-1} name="home" title="home" />
-              {categories.map((category) => (
+              {categories.map((category: any) => (
                 <CategoryMenu
+                  key={category.id}
                   id={category.id}
                   name={category.name}
                   title={category.title}

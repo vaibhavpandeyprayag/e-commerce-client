@@ -17,7 +17,6 @@ function HomePage() {
     firstname: "",
   });
 
-  const topCategoriesCount = 3;
   useEffect(() => {
     console.log("HomePage rendered.");
     const user = JSON.parse(localStorage.getItem("user") as string);
