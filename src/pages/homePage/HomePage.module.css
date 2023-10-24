@@ -8,16 +8,6 @@
   outline: none;
 }
 
-.hoverClass {
-  color: white;
-  background-color: transparent;
-}
-
-.hoverClass:hover {
-  color: black;
-  background-color: white;
-}
-
 @media (min-width: 768px) {
   .topCustom {
     top: 144px;

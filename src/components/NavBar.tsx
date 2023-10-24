@@ -121,37 +121,29 @@ function NavBar() {
             </Link>
           </div>
           <div className="col-md-1 col-lg-3"></div>
-          <div className="col-md-8 col-lg-6 d-flex align-items-center pe-3 gap-1 mb-2 mb-md-0">
+          <div className="col-md-8 col-lg-6 d-flex align-items-center  gap-1 mb-2 mb-md-0">
             <div className="position-relative w-100">
               <input
                 className={`${css.formControlCustom}`}
                 placeholder="Search"
               />
               <button
-                className={`${css.hoverClass}  position-absolute end-0 rounded-end-2 h-100 border-0 px-2`}
+                className={`  position-absolute end-0 rounded-end-2 h-100 border-0 px-2`}
               >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>
             </div>
-            {authState.id !== -1 && (
-              <Link to="/likedproductspage" className="">
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  className={`${css.hoverClass}  text-danger p-2 rounded-5`}
-                  size="xl"
-                />
-              </Link>
-            )}
+
             {authState.id !== -1 && (
               <Link to="/cart">
                 <FontAwesomeIcon
                   icon={faCartShopping}
-                  className={`${css.hoverClass}  p-2 rounded-5`}
+                  className={`  p-2 rounded-5`}
                   size="xl"
                 />
               </Link>
             )}
-            <AvatarTab id={authState.id} firstname={authState.firstname} />
+            <AvatarTab />
           </div>
         </div>
       </div>
@@ -159,7 +151,7 @@ function NavBar() {
         className="d-none d-md-block bg-black w-100"
         style={{ height: "3.5rem" }}
       >
-        <div className="container-lg h-100 p-0">
+        <div className=" container-lg h-100 p-0">
           <div className="d-flex justify-content-start gap-3 h-100">
             <div className="d-flex w-100 justify-content-evenly ">
               <CategoryMenu id={-1} name="home" title="home" />
@@ -169,6 +161,9 @@ function NavBar() {
                   id={category.id}
                   name={category.name}
                   title={category.title}
+                  subcategories={
+                    subcategories[category.id as keyof typeof subcategories]
+                  }
                 />
               ))}
             </div>

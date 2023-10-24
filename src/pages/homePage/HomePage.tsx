@@ -9,12 +9,15 @@ import ErrorPage from "../../components/ErrorPage";
 import CategoryMenu from "../../components/CategtoryMenu";
 import css from "./HomePage.module.css";
 import ProductList from "../../components/ProductList";
+import CategoryViewPage from "../categoryViewPage/CategoryViewPage";
+import SubcategoryViewPage from "../subcategoryViewPage/SubcategoryViewPage";
+import ProductViewPage from "../ProductViewPage/ProductViewPage";
 
 function HomePage() {
   const navigate = useNavigate();
   const [authState, setAuthState] = useState({
     id: -1,
-    firstname: "",
+    name: "",
   });
 
   useEffect(() => {
@@ -28,17 +31,17 @@ function HomePage() {
           setAuthState((prevState) => ({
             ...prevState,
             id: user.id,
-            firstname: user.firstname,
+            name: user.name,
           }));
           console.log("authState updated.");
         } else {
           console.log("Session expired");
-          navigate("/");
+          // navigate("/");
         }
       });
     else {
       console.log("Null token");
-      navigate("/");
+      // navigate("/");
     }
   }, []);
 
@@ -52,7 +55,9 @@ function HomePage() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/categories/:id/:name" element={<ProductList />} />
+          <Route path="/category/:id" element={<CategoryViewPage />} />
+          <Route path="/subcategory/:id" element={<SubcategoryViewPage />} />
+          <Route path="/product/:id" element={<ProductViewPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>

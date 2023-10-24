@@ -1,21 +1,14 @@
-.homeClass {
-  color: rgb(13, 109, 253);
-  background-color: black;
-}
-.homeClass:hover {
-  background-color: white;
-}
-
 .xPaddingCustom {
   padding: 0 0.9rem 0 0.9rem;
 }
 
-.hoverClass {
-  color: white;
-  background-color: black;
+.pseudoIdNeighbour2 {
+  display: none;
+}
+.pseudoIdParent:hover > .pseudoIdNeighbour1 {
+  background-color: white;
 }
 
-.hoverClass:hover {
-  color: black;
-  background-color: white;
+.pseudoIdParent:hover > .pseudoIdNeighbour2 {
+  display: flex;
 }

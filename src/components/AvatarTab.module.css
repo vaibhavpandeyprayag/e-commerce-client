@@ -1,11 +1,3 @@
-.hoverClass {
-  background-color: transparent;
-}
-
-.hoverClass:hover {
-  background-color: lightgrey;
-}
-
 /* sm */
 @media (min-width: 576px) {
 }

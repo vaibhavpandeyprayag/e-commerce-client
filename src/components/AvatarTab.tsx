@@ -1,17 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import css from "./AvatarTab.module.css";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts";
 import {
   faGlobe,
+  faHeart,
   faRightFromBracket,
+  faRightToBracket,
   faUser,
   faUserGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContextState } from "../sharedExports";
 
-function AvatarTab({ id, firstname }: AuthContextState) {
+function AvatarTab() {
+  const { authState, setAuthState } = useContext(AuthContext);
+
+  const logout = () => {
+    setAuthState({ id: -1, name: "" });
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     document.addEventListener("click", (event: Event) => {
       const profilePopup = document.querySelector("#profilecollapse") as any;
@@ -28,33 +38,26 @@ function AvatarTab({ id, firstname }: AuthContextState) {
         }
       }
     });
-  }, []);
+  }, [authState]);
   return (
     <>
-      {id === -1 && (
-        <div className="">
-          <Link
-            to="/auth/login"
-            className={`${css.hoverClass} text-black text-decoration-none px-2 py-2 rounded-1`}
-          >
-            Login
-          </Link>
-          <Link
-            to="/auth/signup"
-            className={`${css.hoverClass}  text-black text-decoration-none px-2 py-2 rounded-1`}
-          >
-            Signup
-          </Link>
-        </div>
+      {authState.id === -1 && (
+        <Link
+          to="/auth/login"
+          className={` d-flex align-items-center gap-2 text-black text-decoration-none px-2 py-2 rounded-1`}
+        >
+          Login
+          <FontAwesomeIcon icon={faRightToBracket} size="lg" />
+        </Link>
       )}
-      {id !== -1 && (
+      {authState.id !== -1 && (
         <div
           className="position-relative d-flex overflow-visible"
           style={{ height: "48px" }}
         >
           <button
             id="profileBtn"
-            className={`${css.hoverClass} d-flex border-0 gap-2 align-items-center rounded-5`}
+            className={` d-flex border-0 gap-2 align-items-center rounded-5`}
             data-bs-toggle="collapse"
             data-bs-target="#profilecollapse"
             aria-expanded="false"
@@ -80,36 +83,49 @@ function AvatarTab({ id, firstname }: AuthContextState) {
             <div className="card">
               <div className="card-header text-center p-3">
                 <span>Hi</span>
-                <h6>{firstname}</h6>
+                <h6>{authState.name}</h6>
               </div>
               <div className="card-body p-0 w-auto">
                 <div className="row m-0">
-                  <div className={`${css.hoverClass} col-12 py-2`}>
+                  <div className={` col-12 p-0`}>
                     <Link
                       to="/profile"
-                      className="d-flex align-items-center gap-2 text-decoration-none text-black"
+                      className="d-flex align-items-center py-2 px-3 gap-2 text-decoration-none text-black"
                     >
                       <FontAwesomeIcon icon={faUserGear} size="lg" />
                       Profile
                     </Link>
                   </div>
-                  <div className={`${css.hoverClass} col-12 py-2`}>
+                  <div className={` col-12 p-0`}>
                     <Link
-                      to="/profile"
-                      className="d-flex align-items-center gap-2 text-decoration-none text-black"
+                      to="/likedproductspage"
+                      className="d-flex align-items-center py-2 px-3 gap-2 text-decoration-none"
                     >
-                      <FontAwesomeIcon icon={faGlobe} size="lg" />
-                      Order History
+                      <FontAwesomeIcon
+                        icon={faHeart}
+                        size="xl"
+                        className="text-danger"
+                      />
+                      <span className="text-black">Liked Products</span>
                     </Link>
                   </div>
-                  <div className={`${css.hoverClass} col-12 py-2`}>
+                  <div className={` col-12 p-0`}>
                     <Link
                       to="/profile"
-                      className="d-flex align-items-center gap-2 text-decoration-none text-black"
+                      className="d-flex align-items-center py-2 px-3 gap-2 text-decoration-none"
+                    >
+                      <FontAwesomeIcon icon={faGlobe} size="lg" />
+                      <span className="text-black">Order History</span>
+                    </Link>
+                  </div>
+                  <div className={` col-12 p-0`}>
+                    <button
+                      className="btn p-0 border-0 d-flex align-items-center py-2 px-3 w-100 gap-2 text-decoration-none text-black"
+                      onClick={() => logout()}
                     >
                       <FontAwesomeIcon icon={faRightFromBracket} size="lg" />
                       Logout
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

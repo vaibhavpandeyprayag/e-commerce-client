@@ -28,14 +28,14 @@ function CategoryAccordion({
           ></div>
         </Link>
         <div
-          className={`d-flex justify-content-end align-items-center w-100 p-2 ${css.hoverClass}`}
+          className={`d-flex justify-content-end align-items-center w-100 p-2 `}
           data-bs-toggle="collapse"
           data-bs-target={`#collapse${id}`}
           aria-expanded="true"
           aria-controls={`collapse${id}`}
         >
           <button
-            className={`accordion-button collapsed w-auto border-0 rounded-circle p-2 me-2 ${css.hoverClass}`}
+            className={`accordion-button collapsed w-auto border-0 rounded-circle p-2 me-2 `}
           ></button>
         </div>
       </div>
@@ -50,7 +50,7 @@ function CategoryAccordion({
               <li key={subcategory.id}>
                 <Link
                   to={"/subcategories/"}
-                  className={`d-flex ps-5 py-1 text-decoration-none fw-semibold ${css.hoverClass}`}
+                  className={`d-flex align-items-baseline ps-5 py-1 text-decoration-none fw-semibold `}
                 >
                   {subcategory.title}
                 </Link>

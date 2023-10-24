@@ -8,7 +8,7 @@ export interface APIResponse {
 
 export interface AuthContextState {
   id: number;
-  firstname: string;
+  name: string;
 }
 export interface AuthContextType {
   authState: AuthContextState;

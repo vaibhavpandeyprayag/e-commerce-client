@@ -4,11 +4,6 @@ import { loggedIn } from "../sharedExports";
 import CategoryMenu from "./CategtoryMenu";
 
 function Home() {
-  const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState({
-    id: 1,
-    name: "phones",
-  });
   useEffect(() => {
     // const token = localStorage.getItem("user");
     // if (token !== null)
