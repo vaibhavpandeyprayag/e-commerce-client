@@ -1,14 +1,9 @@
-.albumWidth {
-  width: 100%;
+.thumbnailColumn {
+  min-height: auto;
 }
 
-.thumbnailColumnWidth {
-  width: 100%;
-}
-
-.photoSection {
-  /* min-height: calc(100vh - 85px); */
-  min-height: calc(100vh - 150px);
+.highlightSection {
+  height: auto;
 }
 
 /* sm */
@@ -17,22 +12,15 @@
 
 /* md */
 @media (min-width: 768px) {
-  .thumbnailColumnWidth {
-    width: auto;
-    height: 100%;
-  }
-  .albumWidth {
-    width: 50%;
-  }
-  .photoSection {
-    max-height: calc(100vh - 186px);
+  .highlightSection {
+    height: calc(100vh - 186px);
   }
 }
 
 /* lg */
 @media (min-width: 992px) {
-  .albumWidth {
-    width: 40%;
+  .thumbnailColumn {
+    max-height: calc(100vh - 186px);
   }
 }
 

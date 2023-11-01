@@ -22,9 +22,9 @@ function ProductViewPage() {
     });
   }, [productId]);
   return (
-    <div>
-      <nav className="bg-success-subtle" aria-label="breadcrumb">
-        <ol className="breadcrumb m-0 p-2">
+    <div className="container-fluid">
+      <nav className="row bg-success-subtle" aria-label="breadcrumb">
+        <ol className="breadcrumb">
           <li className="breadcrumb-item">
             <a href="#">Home</a>
           </li>
@@ -36,65 +36,208 @@ function ProductViewPage() {
           </li>
         </ol>
       </nav>
-      <div className="d-flex flex-column flex-md-row bg-primary-subtle">
-        <div
-          className={`albumSection ${css.albumWidth} d-flex flex-column h-100 flex-md-row bg-danger-subtle`}
-        >
-          <div
-            className={`thumbnailSection ${css.thumbnailColumnWidth} d-flex flex-md-column justify-content-center p-1 ps-md-3 pt-md-3 gap-2`}
-          >
-            <ImageThumbnail
-              id={0}
-              imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
-              setImage={setActiveImage}
-              classes={`${
-                activeImage.id === 1
-                  ? "border border-3 border-dark"
-                  : "border border-dark"
-              }`}
-            />
-            <ImageThumbnail
-              id={1}
-              imagePath="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/c/2/m/4xl-db1024-3bros-original-imagt7byhztkj3u9.jpeg?q=70"
-              setImage={setActiveImage}
-              classes={`${
-                activeImage.id === 1
-                  ? "border border-3 border-dark"
-                  : "border border-dark"
-              }`}
-            />
-            <ImageThumbnail
-              id={2}
-              imagePath="https://rukminim2.flixcart.com/image/832/832/l2z26q80/t-shirt/j/7/e/m-mss22pn052a-metronaut-original-image79jzvnbqdxs.jpeg?q=70"
-              setImage={setActiveImage}
-              classes={`${
-                activeImage.id === 1
-                  ? "border border-3 border-dark"
-                  : "border border-dark"
-              }`}
-            />
-            <ImageThumbnail
-              id={3}
-              imagePath="https://m.media-amazon.com/images/I/91TbbTMbmgL._SL1500_.jpg"
-              setImage={setActiveImage}
-              classes={`${
-                activeImage.id === 1
-                  ? "border border-3 border-dark"
-                  : "border border-dark"
-              }`}
-            />
-          </div>
-          <div
-            className={`${css.photoSection} d-flex align-items-start align-md-items-center`}
-          >
-            <img
-              className="w-100 object-fit-contain"
-              src={activeImage.imagePath}
-            />
+      <div className={`row bg-danger-subtle`}>
+        <div className={`col-12 col-md-5 bg-danger`}>
+          <div className={`row align-items-lg-center`}>
+            <div
+              className={`col-12 col-lg-2 d-flex flex-row flex-lg-column justify-content-center align-items-center gap-2 p-2 overflow-scroll ${css.thumbnailColumn} bg-secondary`}
+            >
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={1}
+                imagePath="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/c/2/m/4xl-db1024-3bros-original-imagt7byhztkj3u9.jpeg?q=70"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={3}
+                imagePath="https://m.media-amazon.com/images/I/91TbbTMbmgL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={1}
+                imagePath="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/c/2/m/4xl-db1024-3bros-original-imagt7byhztkj3u9.jpeg?q=70"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={1}
+                imagePath="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/c/2/m/4xl-db1024-3bros-original-imagt7byhztkj3u9.jpeg?q=70"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={3}
+                imagePath="https://m.media-amazon.com/images/I/91TbbTMbmgL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={2}
+                imagePath="https://rukminim2.flixcart.com/image/832/832/l2z26q80/t-shirt/j/7/e/m-mss22pn052a-metronaut-original-image79jzvnbqdxs.jpeg?q=70"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={3}
+                imagePath="https://m.media-amazon.com/images/I/91TbbTMbmgL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={1}
+                imagePath="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/c/2/m/4xl-db1024-3bros-original-imagt7byhztkj3u9.jpeg?q=70"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={0}
+                imagePath="https://m.media-amazon.com/images/I/61VC4kJtDAL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+              <ImageThumbnail
+                id={3}
+                imagePath="https://m.media-amazon.com/images/I/91TbbTMbmgL._SL1500_.jpg"
+                setImage={setActiveImage}
+                classes={`${
+                  activeImage.id === 1
+                    ? "border border-3 border-dark"
+                    : "border border-3 border-light"
+                }`}
+              />
+            </div>
+            <div className={`col-12 col-lg-10 p-0 ${css.thumbnailColumn}`}>
+              <img
+                className={`object-fit-contain w-100 ${css.thumbnailColumn}`}
+                src={activeImage.imagePath}
+              />
+            </div>
           </div>
         </div>
-        <div className="highlightSection">Hello</div>
+        <div
+          className={`col-12 col-md-7 ${css.highlightSection} overflow-scroll`}
+        >
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+          <h1>HELLO</h1>
+        </div>
       </div>
+
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
+      <h1>HELLO</h1>
     </div>
   );
 }

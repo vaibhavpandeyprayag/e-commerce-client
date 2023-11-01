@@ -19,7 +19,7 @@ function ImageThumbnail({
   return (
     <img
       id={id.toString()}
-      className={`${classes}`}
+      className={` ${classes}`}
       style={{ padding: "2px", width: "3.2rem", height: "3.5rem" }}
       src={imagePath}
       onMouseOver={() => setImage({ id: id, imagePath: imagePath })}
