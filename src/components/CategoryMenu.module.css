@@ -2,6 +2,11 @@
   padding: 0 0.9rem 0 0.9rem;
 }
 
+.underlineAnimation {
+  width: 0px;
+  transition: all 0.1s ease-in-out;
+}
+
 .pseudoIdNeighbour2 {
   display: none;
 }
@@ -11,4 +16,8 @@
 
 .pseudoIdParent:hover > .pseudoIdNeighbour2 {
   display: flex;
+}
+
+.categoryLink:hover > .underlineAnimation {
+  width: 150%;
 }

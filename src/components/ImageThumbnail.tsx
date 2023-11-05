@@ -19,6 +19,7 @@ function ImageThumbnail({
   return (
     <img
       id={id.toString()}
+      alt={`preview${id.toString()}`}
       className={` ${classes}`}
       style={{ padding: "2px", width: "3.2rem", height: "3.5rem" }}
       src={imagePath}

@@ -1,4 +1,4 @@
-.thumbnailColumn {
+.album {
   min-height: auto;
 }
 
@@ -19,7 +19,7 @@
 
 /* lg */
 @media (min-width: 992px) {
-  .thumbnailColumn {
+  .album {
     max-height: calc(100vh - 186px);
   }
 }

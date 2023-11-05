@@ -26,17 +26,21 @@ function CategoryMenu({
       </Link>
       {id != -1 && (
         <div
-          className={`${css.pseudoIdNeighbour2} bg-white position-fixed start-0 end-0 py-4 justify-content-center`}
+          className={`${css.pseudoIdNeighbour2} bg-white position-fixed start-0 end-0 py-4`}
         >
-          <ul className="list-unstyled z-1 text-center">
+          <ul className="list-unstyled z-1 text-center w-100">
             {subcategories &&
               subcategories.map((subcategory) => (
                 <li key={subcategory.id}>
                   <Link
                     to={`/subcategory/${subcategory.id}`}
-                    className={`d-inline-flex align-items-baseline text-decoration-none p-1 fw-semibold `}
+                    className={`${css.categoryLink} position-relative d-inline-flex flex-column align-items-center text-decoration-none p-1 fw-semibold `}
                   >
                     {subcategory.title}
+                    <div
+                      className={`position-absolute bottom-0 bg-warning ${css.underlineAnimation}`}
+                      style={{ height: "0.15rem" }}
+                    ></div>
                   </Link>
                 </li>
               ))}

@@ -22,6 +22,9 @@ function NavBar() {
   const [subcategories, setSubcategories] = useState({});
 
   useEffect(() => {
+    console.log("categories fetched");
+  }, [categories]);
+  useEffect(() => {
     console.log("subcategories fetched");
   }, [subcategories]);
 
